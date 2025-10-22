@@ -29,7 +29,6 @@ Understanding these types is essential for writing **type-safe**, **robust**, an
 20. [Type Juggling](#type-juggling)
 21. [Summary](#summary)
 22. [Related Links](#related)
-23. [License](#license)
 
 ---
 
