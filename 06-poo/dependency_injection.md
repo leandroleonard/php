@@ -289,11 +289,3 @@ It’s fundamental for writing modular, testable, and maintainable PHP applicati
 * [SOLID Principles in PHP](https://phptherightway.com/#solid)
 * [PHP Interfaces](https://www.php.net/manual/en/language.oop5.interfaces.php)
 
----
-
-```
-
----
-
-Queres que o próximo siga o mesmo estilo (com explicações passo a passo, exemplos e tabela de pitfall), mas sobre **Inversion of Control (IoC)** ou outro conceito relacionado (como *Service Container*, *Design Patterns*, etc.)?
-```
