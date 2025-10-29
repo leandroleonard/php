@@ -1,82 +1,92 @@
-````markdown
-# Abstract Classes in PHP
+# **Abstract Classes** in PHP
 
-## 🧭 Table of Contents
-1. [Summary](#summary)  
-2. [What is an Abstract Class?](#what-is-an-abstract-class)  
-3. [Syntax](#syntax)  
-4. [How Abstract Classes Work](#how-abstract-classes-work)  
-5. [Abstract Methods](#abstract-methods)  
-6. [Example: Abstract Class in Action](#example-abstract-class-in-action)  
-7. [Key Points](#key-points)  
-8. [Abstract Classes vs Interfaces](#abstract-classes-vs-interfaces)  
-9. [Practical Use Cases](#practical-use-cases)  
-10. [Conclusion](#conclusion)
+An **abstract class** in PHP is a blueprint for other classes.  
+It defines **common behavior and structure** but cannot be instantiated directly.  
+Abstract classes are key to building consistent, reusable, and organized object-oriented code.
 
 ---
 
-## 🧩 Summary
-In PHP, an **abstract class** is a special type of class that cannot be instantiated directly.  
-It serves as a **blueprint** for other classes and is used to define **common behaviors and structure** that child classes must implement.
+## 📖 Table of Contents
 
-Abstract classes help enforce a consistent API and promote code reusability and organization.
-
----
-
-## 📘 What is an Abstract Class?
-
-An **abstract class**:
-- Cannot be instantiated directly.
-- May contain **abstract methods** (without implementation).
-- May also contain **regular methods** with implementation.
-- Is used as a **base class** for other classes.
-
-Think of it as a **template** that defines how child classes should behave.
+1. [Overview](#overview)  
+2. [Basic Syntax](#basic-syntax)  
+3. [Abstract Methods](#abstract-methods)  
+4. [Instantiation Rules](#instantiation-rules)  
+5. [Example — Real Implementation](#example--real-implementation)  
+6. [Key Points](#key-points)  
+7. [Abstract Classes vs Interfaces](#abstract-classes-vs-interfaces)  
+8. [Practical Use Cases](#practical-use-cases)  
+9. [Summary](#summary)  
+10. [Related](#related)
 
 ---
 
-## 🧱 Syntax
+## Overview
+
+An abstract class acts as a **template** that defines what all its subclasses must implement.  
+It can contain:
+- **Abstract methods** (no implementation)
+- **Concrete methods** (implemented normally)
+- **Properties and constants**
+
+You **cannot create an object** directly from an abstract class — you must extend it.
+
+---
+
+## Basic Syntax
 
 ```php
 <?php
 
 abstract class Animal {
-    // Abstract method (must be implemented by subclasses)
     abstract public function makeSound();
 
-    // Regular method
     public function sleep() {
         echo "Sleeping...\n";
     }
 }
-````
-
-> Any class with at least one `abstract` method must itself be declared as `abstract`.
-
----
-
-## ⚙️ How Abstract Classes Work
-
-1. You **cannot** create an instance of an abstract class directly.
-2. You **must** create a subclass that extends the abstract class.
-3. The subclass **must implement** all abstract methods.
-
----
-
-## 🧠 Abstract Methods
-
-An **abstract method** is declared without a body.
-It defines a method signature that subclasses are forced to implement.
-
-```php
-abstract public function makeSound();
 ```
 
-Each subclass must define its own version of `makeSound()`.
+> Any class with at least one abstract method must also be declared as `abstract`.
 
 ---
 
-## 🧩 Example: Abstract Class in Action
+## Abstract Methods
+
+Abstract methods have **no body** — they define a contract that child classes must fulfill.
+
+```php
+abstract class Animal {
+    abstract public function makeSound();
+}
+```
+
+Subclasses are **required** to implement these methods:
+
+```php
+class Dog extends Animal {
+    public function makeSound() {
+        echo "Woof!";
+    }
+}
+```
+
+---
+
+## Instantiation Rules
+
+You **cannot instantiate** an abstract class directly:
+
+```php
+$animal = new Animal(); 
+// Fatal error: Cannot instantiate abstract class Animal
+```
+
+You must extend it and create an instance of a **concrete subclass**.
+
+---
+
+## Example — Real Implementation
 
 ```php
 <?php
@@ -102,57 +112,63 @@ class Cat extends Animal {
 }
 
 $dog = new Dog();
-$dog->makeSound(); // Output: Woof!
-$dog->sleep();     // Output: Sleeping...
+$dog->makeSound(); // Woof!
+$dog->sleep();     // Sleeping...
 
 $cat = new Cat();
-$cat->makeSound(); // Output: Meow!
+$cat->makeSound(); // Meow!
 ```
 
 ---
 
-## 📋 Key Points
+## Key Points
 
-* Abstract classes **cannot be instantiated**.
-* They may contain both **abstract and concrete** methods.
-* Child classes must **implement all abstract methods**.
-* Useful for defining **base functionality** that other classes extend.
-
----
-
-## ⚖️ Abstract Classes vs Interfaces
-
-| Feature                      | Abstract Class               | Interface                   |
-| ---------------------------- | ---------------------------- | --------------------------- |
-| Instantiation                | ❌ Not possible               | ❌ Not possible              |
-| Contains implemented methods | ✅ Yes                        | ❌ No                        |
-| Can have properties          | ✅ Yes                        | ❌ No                        |
-| Multiple inheritance         | ❌ No                         | ✅ Yes (multiple interfaces) |
-| Purpose                      | Share behavior and structure | Define a contract only      |
+| Concept              | Description                               |
+| -------------------- | ----------------------------------------- |
+| **Purpose**          | Define a template or base class           |
+| **Instantiation**    | Cannot be instantiated directly           |
+| **Abstract Methods** | Must be implemented by subclasses         |
+| **Concrete Methods** | Optional — can include default logic      |
+| **Properties**       | Allowed                                   |
+| **Access Modifiers** | Must be compatible with parent definition |
 
 ---
 
-## 💡 Practical Use Cases
+## Abstract Classes vs Interfaces
 
-* Defining a **common base** for similar objects (e.g., `Vehicle`, `Shape`, `PaymentGateway`).
-* Enforcing consistent method signatures across subclasses.
-* Providing **default implementations** shared among derived classes.
-
----
-
-## 🏁 Conclusion
-
-Abstract classes in PHP are a core **object-oriented programming** feature that promote clean architecture and consistent design.
-
-They let developers:
-
-* Define shared logic,
-* Enforce structure across subclasses,
-* And maintain code reusability with clear hierarchies.
-
-> ✅ Use abstract classes when multiple classes share common functionality but need to implement specific behaviors differently.
+| Feature                | Abstract Class            | Interface              |
+| ---------------------- | ------------------------- | ---------------------- |
+| Can have properties    | Yes                     | No                   |
+| Can have method bodies | Yes                     | No                   |
+| Multiple inheritance   | No                      | Yes                  |
+| Purpose                | Share structure and logic | Define a contract only |
+| Instantiation          | No                      | No                   |
 
 ---
 
-```
-```
+## Practical Use Cases
+
+* Defining **common base behavior** (e.g. `Vehicle`, `Shape`, `PaymentGateway`)
+* Enforcing **method contracts** across child classes
+* Providing **default logic** while allowing customization
+* Creating **consistent APIs** across subclasses
+
+---
+
+## Summary
+
+| Feature                       | Description                         |
+| ----------------------------- | ----------------------------------- |
+| **Type**                      | Class modifier                      |
+| **Purpose**                   | Enforces structure and shared logic |
+| **Can be instantiated**       | No                                |
+| **Supports abstract methods** | Yes                               |
+| **Supports concrete methods** | Yes                               |
+| **Encourages code reuse**     | Strongly                          |
+
+---
+
+## Related
+* [Interfaces](https://github.com/leandroleonard/php/blob/main/06-poo/interfaces.md)
+* [Traits](https://github.com/leandroleonard/php/blob/main/06-poo/traits.md)
+* [Polymorphism](#)
