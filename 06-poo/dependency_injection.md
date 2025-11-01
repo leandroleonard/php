@@ -288,4 +288,5 @@ It’s fundamental for writing modular, testable, and maintainable PHP applicati
 * [Service Containers in Laravel](https://laravel.com/docs/container)
 * [SOLID Principles in PHP](https://phptherightway.com/#solid)
 * [PHP Interfaces](https://www.php.net/manual/en/language.oop5.interfaces.php)
+* [PHP Interfaces - Git](https://github.com/leandroleonard/php/blob/main/06-poo/interfaces.md)
 
