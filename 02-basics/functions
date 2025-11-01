@@ -1,0 +1,283 @@
+# **Functions in PHP**
+
+Functions in PHP are **blocks of reusable code** that perform specific tasks.
+They make your code more **organized**, **modular**, and **maintainable**, allowing you to avoid repetition and improve clarity.
+
+---
+
+## 📖 Table of Contents
+
+1. [Overview](#overview)
+2. [Defining a Function](#defining-a-function)
+3. [Calling a Function](#calling-a-function)
+4. [Parameters](#parameters)
+5. [Default Parameter Values](#default-parameter-values)
+6. [Return Values](#return-values)
+7. [Type Declarations](#type-declarations)
+8. [Variable-Length Argument Lists (`...`)](#variable-length-argument-lists-)
+9. [Anonymous and Arrow Functions](#anonymous-and-arrow-functions)
+10. [Recursion](#recursion)
+11. [Scope and Global Variables](#scope-and-global-variables)
+12. [Best Practices](#best-practices)
+13. [Summary](#summary)
+14. [Related Topics](#related-topics)
+
+---
+
+## Overview
+
+Functions allow you to group related logic under a single name.
+Once defined, a function can be called multiple times from different parts of a script.
+
+PHP has:
+
+* **Built-in functions** (e.g., `strlen()`, `array_merge()`)
+* **User-defined functions** (created by the developer)
+
+---
+
+## Defining a Function
+
+A function is defined using the `function` keyword:
+
+```php
+function greet() {
+    echo "Hello, PHP!";
+}
+```
+
+---
+
+## Calling a Function
+
+After definition, you can call it by its name followed by parentheses:
+
+```php
+greet(); // Output: Hello, PHP!
+```
+
+Functions must be **declared before use** unless defined in included files that load earlier.
+
+---
+
+## Parameters
+
+Functions can accept **parameters** (inputs) that allow customization of their behavior.
+
+```php
+function greetUser($name) {
+    echo "Hello, $name!";
+}
+
+greetUser("Leandro"); // Output: Hello, Leandro!
+```
+
+---
+
+## Default Parameter Values
+
+Parameters can have **default values** that are used when no argument is provided.
+
+```php
+function greetUser($name = "Guest") {
+    echo "Hello, $name!";
+}
+
+greetUser(); // Output: Hello, Guest!
+```
+
+Default parameters must appear **after** required ones.
+
+---
+
+## Return Values
+
+Functions can **return** data using the `return` statement.
+
+```php
+function add($a, $b) {
+    return $a + $b;
+}
+
+$result = add(2, 3); // 5
+```
+
+Once a function reaches `return`, execution stops and control goes back to the caller.
+
+---
+
+## Type Declarations
+
+PHP allows you to **declare parameter and return types** for stronger type checking.
+
+### Parameter Type Declarations
+
+```php
+function multiply(int $a, int $b): int {
+    return $a * $b;
+}
+
+echo multiply(2, 5); // 10
+```
+
+### Return Type Declarations
+
+```php
+function getGreeting(): string {
+    return "Hello!";
+}
+```
+
+### Nullable Types
+
+You can use `?` to allow `null` as a valid value:
+
+```php
+function findUser(?int $id): ?string {
+    if ($id === null) return null;
+    return "User #$id";
+}
+```
+
+---
+
+## Variable-Length Argument Lists (`...`)
+
+PHP supports **variadic functions** using the spread operator `...`, which collects all remaining arguments into an array.
+
+```php
+function sum(...$numbers) {
+    return array_sum($numbers);
+}
+
+echo sum(1, 2, 3, 4); // 10
+```
+
+---
+
+## Anonymous and Arrow Functions
+
+You can define **functions without names** (anonymous) and assign them to variables.
+
+```php
+$square = function($n) {
+    return $n * $n;
+};
+
+echo $square(4); // 16
+```
+
+PHP 7.4+ introduced **arrow functions** for shorter syntax:
+
+```php
+$double = fn($n) => $n * 2;
+echo $double(5); // 10
+```
+
+Arrow functions **automatically inherit** variables from the parent scope.
+
+---
+
+## Recursion
+
+A function can call **itself** — a technique known as recursion.
+
+```php
+function factorial($n) {
+    if ($n <= 1) return 1;
+    return $n * factorial($n - 1);
+}
+
+echo factorial(5); // 120
+```
+
+Be careful: recursion without a proper **base case** can cause memory exhaustion.
+
+---
+
+## Scope and Global Variables
+
+Variables declared inside functions are **local** by default.
+
+```php
+$x = 10;
+
+function test() {
+    echo $x; // Undefined variable
+}
+```
+
+To access a global variable inside a function, use the `global` keyword:
+
+```php
+$x = 10;
+
+function test() {
+    global $x;
+    echo $x; // 10
+}
+```
+
+Or use `$GLOBALS`:
+
+```php
+$GLOBALS['y'] = 20;
+function showY() {
+    echo $GLOBALS['y'];
+}
+showY(); // 20
+```
+
+---
+
+## Best Practices
+
+Keep functions **small** and **single-purpose**
+Use **descriptive names** (verbs for actions)
+Avoid using **global variables** inside functions
+Use **type declarations** for clarity and safety
+Document parameters and return values with PHPDoc
+
+Example:
+
+```php
+/**
+ * Calculates the area of a rectangle.
+ *
+ * @param float $width
+ * @param float $height
+ * @return float
+ */
+function rectangleArea(float $width, float $height): float {
+    return $width * $height;
+}
+```
+
+---
+
+## Summary
+
+| Concept                 | Description                                  |
+| ----------------------- | -------------------------------------------- |
+| **Definition keyword**  | `function`                                   |
+| **Parameter types**     | Declared with type hints                     |
+| **Return type**         | Declared after `:`                           |
+| **Default values**      | Optional, must come last                     |
+| **Variadic params**     | `...$args`                                   |
+| **Anonymous functions** | `function() {}`                              |
+| **Arrow functions**     | `fn($x) => $x * 2`                           |
+| **Recursion**           | Function calls itself                        |
+| **Scope**               | Local by default, `global` for external vars |
+
+---
+
+## Related Topics
+
+* [Type Declarations](#)
+* [Anonymous Functions](#)
+* [Closures in PHP](#)
+* [Variables and Scope](#)
+* [References and Copies](#https://github.com/leandroleonard/php/blob/main/02-basics/references_and_copy.md)
+
+---
+
