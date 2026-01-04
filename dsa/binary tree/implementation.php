@@ -30,7 +30,7 @@ class BinaryTree
         }
     }
 
-    public function insert_recursivly(Node $node, int $val)
+    private function insert_recursivly(Node $node, int $val)
     {
         if($val < $node->val){
             if(!$node->left){
@@ -51,7 +51,7 @@ class BinaryTree
         return $this->search_recursivly($this->root, $val);
     }
 
-    public function search_recursivly(?Node $node, int $val)     : bool
+    private function search_recursivly(?Node $node, int $val)     : bool
     {
         if(!$node) return false;
 
