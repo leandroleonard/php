@@ -61,14 +61,72 @@ class BinaryTree
         
         return $this->search_recursivly($node->right, $val);
     }
+
+    public function preorder(): array{
+        $result = [];
+
+        $this->preorder_traversal($this->root, $result);
+
+        return $result;
+    }
+
+    private function preorder_traversal(?Node $node, array &$result){
+        if ($node){
+            $result[] = $node->val;
+            $this->preorder_traversal($node->left, $result);
+            $this->preorder_traversal($node->right, $result);
+        }
+    }
+
+
+    public function postorder(): array{
+        $result = [];
+
+        $this->postorder_traversal($this->root, $result);
+
+        return $result;
+    }
+
+    private function postorder_traversal(?Node $node, array &$result){
+        if ($node){
+            $this->postorder_traversal($node->left, $result);
+            $this->postorder_traversal($node->right, $result);
+            $result[] = $node->val;
+        }
+    }
+
+
+    public function inorder(): array{
+        $result = [];
+
+        $this->inorder_traversal($this->root, $result);
+
+        return $result;
+    }
+
+    private function inorder_traversal(?Node $node, array &$result){
+        if ($node){
+            $this->inorder_traversal($node->left, $result);
+            $result[] = $node->val;
+            $this->inorder_traversal($node->right, $result);
+        }
+    }
+
+    
 }
 
 $binaryTree = new BinaryTree();
 
+$binaryTree->insert(5);
+$binaryTree->insert(3);
 $binaryTree->insert(1);
 $binaryTree->insert(10);
 $binaryTree->insert(7);
-$binaryTree->insert(3);
+$binaryTree->insert(15);
 
 var_dump($binaryTree->search(10));
 var_dump($binaryTree->search(4));
+
+var_dump($binaryTree->preorder());
+var_dump($binaryTree->inorder());
+var_dump($binaryTree->postorder());
