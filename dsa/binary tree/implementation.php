@@ -112,6 +112,23 @@ class BinaryTree
         }
     }
 
+    public function dfs(int $val): bool
+    {
+
+        return $this->dfs_recursivly($this->root, $val);
+    }
+
+    private function dfs_recursivly(?Node $node, int $val)
+    {
+        if(!$node) return false;
+
+        if ($node->val == $val) return true;
+
+        if($this->dfs_recursivly($node->left, $val)) return true;
+
+        if($this->dfs_recursivly($node->right, $val)) return true;
+    }
+
     
 }
 
@@ -123,10 +140,13 @@ $binaryTree->insert(1);
 $binaryTree->insert(10);
 $binaryTree->insert(7);
 $binaryTree->insert(15);
+$binaryTree->insert(20);
 
-var_dump($binaryTree->search(10));
-var_dump($binaryTree->search(4));
+// var_dump($binaryTree->search(10));
+// var_dump($binaryTree->search(4));
 
-var_dump($binaryTree->preorder());
-var_dump($binaryTree->inorder());
-var_dump($binaryTree->postorder());
+// var_dump($binaryTree->preorder());
+// var_dump($binaryTree->inorder());
+// var_dump($binaryTree->postorder());
+
+var_dump($binaryTree->dfs(200));
