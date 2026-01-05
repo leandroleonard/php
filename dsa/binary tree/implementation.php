@@ -118,7 +118,7 @@ class BinaryTree
         return $this->dfs_recursivly($this->root, $val);
     }
 
-    private function dfs_recursivly(?Node $node, int $val)
+    private function dfs_recursivly(?Node $node, int $val): bool
     {
         if(!$node) return false;
 
@@ -127,6 +127,31 @@ class BinaryTree
         if($this->dfs_recursivly($node->left, $val)) return true;
 
         if($this->dfs_recursivly($node->right, $val)) return true;
+
+        return false;
+    }
+
+    public function bfs(int $val): bool
+    {
+        if(!$this->root) return false;
+
+        $queue = [];
+        $queue[] = $this->root;
+
+        while($queue){
+            $node = array_shift($queue);
+
+            if($node->val == $val) return true;
+
+            if($node->left)
+                $queue[] = $node->left;
+
+            if($node->right)
+                $queue[] = $node->right;
+
+        }
+
+        return false;
     }
 
     
@@ -142,11 +167,13 @@ $binaryTree->insert(7);
 $binaryTree->insert(15);
 $binaryTree->insert(20);
 
-// var_dump($binaryTree->search(10));
-// var_dump($binaryTree->search(4));
+var_dump($binaryTree->search(10));
+var_dump($binaryTree->search(4));
 
-// var_dump($binaryTree->preorder());
-// var_dump($binaryTree->inorder());
-// var_dump($binaryTree->postorder());
+var_dump($binaryTree->preorder());
+var_dump($binaryTree->inorder());
+var_dump($binaryTree->postorder());
 
 var_dump($binaryTree->dfs(200));
+
+var_dump($binaryTree->bfs(20));
