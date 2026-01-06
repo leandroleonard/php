@@ -154,6 +154,24 @@ class BinaryTree
         return false;
     }
 
+    public function size(): int
+    {
+        $size = 0;
+
+        $this->size_recursivly($this->root, $size);
+
+        return $size;
+    }
+
+    private function size_recursivly(?Node $node, &$size)
+    {
+        if($node){
+            $size ++;
+            $this->size_recursivly($node->left, $size);
+            $this->size_recursivly($node->right, $size);
+        }
+    }
+
     
 }
 
